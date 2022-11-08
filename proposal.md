@@ -36,6 +36,6 @@ The absolute best outcome for this project is that I can take user input for any
 TODO
 
 ## In a paragraph or more, outline your next steps. What new skills will you need to acquire? What topics will you need to research? If working with one of two classmates, who will do what?
-The first step is to look through my class notes and problems to figure out if there is a step by step process that I could write into code. I will first look at which equations I will need to use in the code. I will need to look at file reading and how it can pull a specific number from a table. I will also need to create a table from the textbook with all the values I could need.
+The first step is to look through my class notes and problems to figure out if there is a step by step process that I could write into code. I will first look at which equations I will need to use in the code. I will need to look at file reading and how it can pull a specific number from a table. I will also need to create a table from the textbook with all the values I could need. Then its just putting the code together with it doing the right calculations with the right numbers. I think the biggest obstacle will be that there are a lot of ways I can take user input and how complex I want the problems I want to calculate to be.
 
 TODO
