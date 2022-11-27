@@ -2,15 +2,15 @@
 
 #### Your name
 
-TODO
+Alexa Sano
 
 #### Your section leader's name
 
-TODO
+Bin Li
 
 #### Project title
 
-TODO
+Mechanics of Solids Time Saver
 
 ***
 
@@ -18,12 +18,12 @@ Short answers for the below questions suffice. If you want to alter your plan fo
 
 #### What have you done for your project so far?
 
-TODO
+I have the basic skeleton of the code and equations set up. All I have to do is find a working equation that works for all situations for that specific scenario. (should be easier than it sounds). I also have to add the turtle pop up.
 
 #### What have you not done for your project yet?
 
-TODO
+I have not found how to get shear stress and strain equations using python. I am currently looking into how to graph equations to python.
 
 #### What problems, if any, have you encountered?
 
-TODO
+Current problem is just trial and error finding an equation that works for each scenario. Also finding a way to streamline the code because there are a lot of inputs required
