@@ -111,7 +111,7 @@ if beam == 1 and units == 1:
             
         
             
-    
+# cantilevered beam but english
 if beam == 1 and units == 2:
     keepGoing = True
     appliedForces = []
@@ -121,10 +121,10 @@ if beam == 1 and units == 2:
     print("You selected Cantilevered Beam")
     while keepGoing == True:
         print("Enter forces one at a time")
-        Force = int(input("What downward force is applied on the beam (in pounds)? "))
+        Force = int(input("What downward force is applied on the beam (in Newtons)? "))
         appliedForces.append(Force)
         print(appliedForces)
-        distance = int(input("How far away is this force from the fixed point (in feet)? "))
+        distance = int(input("How far away is this force from the fixed point (in meters)? "))
         distances.append(distance)
         print(distances)
         more = input("Do you have more forces to input? Y/YES or N/NO ").lower()
@@ -135,12 +135,72 @@ if beam == 1 and units == 2:
     #Calculate reaction in the Y-Direction
     for i in range(len(appliedForces)):
         reactionY += appliedForces[i]
-    print("The reaction force in the y-direction is", reactionY, "lbs")
+    print("The reaction force in the y-direction is", reactionY, "N")
 
     #Calculate moment reaction
     for j in range(len(appliedForces)):
         moment += (appliedForces[j]*distances[j])
-    print("The moment reaction of the beam is", moment, "lbs*ft")
+    print("The moment reaction of the beam is", moment, "lb*ft")
+    #attempt to find shear stress across the beam
+    needMore = input("Do you need to find the shear force, moment, or both? S, M, or B ").lower()
+    if needMore == "s":
+        length = input("How long is the beam? ")
+        distances.append(length)
+        distances.insert(0,0)
+        allForces = appliedForces
+        allForces.insert(0,reactionY)
+        V_list = []
+        V = reactionY
+        for k in range(len(appliedForces)):
+            print("Shear force in section", k+1,",","[",distances[k],",",distances[k+1],")") #this works!!!!
+            # Fy = Ay - f1 - f2 - f3 - V = 0
+            # V = Ay - f1 - f2- f3
+            # Fy = Ay - V = 0
+            # V = Ay
+            # Fy = Ay - f1 - V = 0
+            # V = Ay - f1
+            # add summation to get rid of applied forces
+            # how do i create a new variable... append the new Vs to shear to list?
+            V -= appliedForces[k]
+            V_list.append(V)
+            print(V)
+        #print(V_list)
+
+        #find moment equations
+        #EM = M +Fd +fd =0
+    if needMore == "m":
+        length = input("How long is the beam? ")
+        distances.append(length)
+        distances.insert(0,0)
+        allForces = appliedForces
+        allForces.insert(0,reactionY)
+        M_list = []
+        M = moment
+        for p in range(len(appliedForces)):
+            print("Moment force in section", p+1,",","[",distances[p],",",distances[p+1],")")
+            M -= appliedForces[p]*distances[p]
+            M_list.append(M)
+            print(M)
+
+    if needMore == "b":
+        length = input("How long is the beam? ")
+        distances.append(length)
+        distances.insert(0,0)
+        allForces = appliedForces
+        allForces.insert(0,reactionY)
+        V_list = []
+        V = reactionY
+        M_list = []
+        M = moment
+        for k in range(len(appliedForces)):
+            print("")
+            print("Section", k+1,",","[",distances[k],",",distances[k+1],")") #this works!!!!
+            V -= appliedForces[k]
+            V_list.append(V)
+            print("Shear Force", V, "lb")
+            M -= appliedForces[k]*distances[k]
+            M_list.append(M)
+            print("Moment force",M, "lb*ft")
     
 #simply supported beam
 if beam ==2 and units == 1:
@@ -176,6 +236,69 @@ if beam ==2 and units == 1:
         TotalForce += appliedForces[j]
     Ay = TotalForce - By
     print("The reaction force at Ay is", Ay, "N")
+    
+    #attempt to find shear stress across the beam
+
+    needMore = input("Do you need to find the shear force, moment, or both? S, M, or B ").lower()
+    if needMore == "s":
+        distances.append(length)
+        distances.insert(0,0)
+        allForces = appliedForces
+        allForces.insert(0,Ay)
+        print(allForces)
+        V_list = []
+        V = Ay
+        for k in range(len(appliedForces)):
+            print("Shear force in section", k+1,",","[",distances[k],"m,",distances[k+1],"m)") #this works!!!!
+            # Fy = Ay - f1 - f2 - f3 - V = 0
+            # V = Ay - f1 - f2- f3
+            # Fy = Ay - V = 0
+            # V = Ay
+            # Fy = Ay - f1 - V = 0
+            # V = Ay - f1
+            # add summation to get rid of applied forces
+            # how do i create a new variable... append the new Vs to shear to list?
+            V -= appliedForces[k]
+            V_list.append(V)
+            print(V)
+        #print(V_list)
+
+        #find moment equations
+        #EM = M +Fd +fd =0
+    if needMore == "m":
+        distances.append(length)
+        distances.insert(0,0)
+        allForces = appliedForces
+        allForces.insert(0,Ay)
+        M_list = []
+        M = 0
+        for p in range(len(appliedForces)):
+            print("Moment force in section", p+1,",","[",distances[p],"m,",distances[p+1],"m)")
+            M -= appliedForces[p]*distances[p]
+            M_list.append(M)
+            print(M)
+
+    if needMore == "b":
+        distances.append(length)
+        distances.insert(0,0)
+        allForces = appliedForces
+        allForces.insert(0,0)
+        V_list = []
+        V = Ay
+        M_list = []
+        M = 0
+        for k in range(len(appliedForces)):
+            print("")
+            print("Section", k+1,",","[",distances[k],",",distances[k+1],")") #this works!!!!
+            V -= appliedForces[k]
+            V_list.append(V)
+            print("Shear Force", V, "N")
+            M -= appliedForces[k]*distances[k]
+            M_list.append(M)
+            print("Moment force at",distance[k], "m",M, "N*m")
+
+
+
     
 if beam ==2 and units == 2:
     keepGoing = True
